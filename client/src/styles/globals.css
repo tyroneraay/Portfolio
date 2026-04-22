@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 250 250 247;
+    --bg-elevated: 255 255 255;
+    --fg: 17 24 39;
+    --fg-muted: 75 85 99;
+    --border: 229 231 235;
+    --accent: 13 132 245;
+  }
+
+  .dark {
+    --bg: 15 17 21;
+    --bg-elevated: 24 27 34;
+    --fg: 237 242 247;
+    --fg-muted: 156 163 175;
+    --border: 38 44 55;
+    --accent: 56 161 255;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--fg));
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply absolute left-2 top-2 z-50 -translate-y-20 rounded-md bg-brand-500 px-3 py-2 text-white focus:translate-y-0;
+    transition: transform 0.2s;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--border));
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--accent) / 0.5);
+  }
+
+  /* Focus rings */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-400 ring-offset-2 ring-offset-transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-20 sm:py-24;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-500 text-white shadow-soft hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply btn border border-[rgb(var(--border))] bg-transparent text-[rgb(var(--fg))] hover:border-brand-400 hover:text-brand-500 hover:-translate-y-0.5;
+  }
+
+  .card {
+    @apply rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] shadow-cozy;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] px-3 py-1 text-xs font-medium text-[rgb(var(--fg-muted))];
+  }
+
+  .text-muted {
+    color: rgb(var(--fg-muted));
+  }
+}
+
+@layer utilities {
+  .bg-mesh {
+    background-image:
+      radial-gradient(at 20% 20%, rgba(13, 132, 245, 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(186, 221, 255, 0.25) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(56, 161, 255, 0.10) 0px, transparent 50%);
+  }
+
+  .dark .bg-mesh {
+    background-image:
+      radial-gradient(at 20% 20%, rgba(13, 132, 245, 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(11, 59, 116, 0.35) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(56, 161, 255, 0.12) 0px, transparent 50%);
+  }
+}
